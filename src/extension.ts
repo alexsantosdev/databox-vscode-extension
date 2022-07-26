@@ -1,14 +1,17 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+import { LeftWebviewProvider } from './provider/LeftWebviewProvider';
+
 export function activate(context: vscode.ExtensionContext) {
-	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "databox-vscode-extension" is now active!');
+
+	const provider = new LeftWebviewProvider(context.extensionUri);
+
+	context.subscriptions.push(
+		vscode.window.registerWebviewViewProvider(
+			LeftWebviewProvider.viewType,
+		  provider
+		)
+	  );
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
@@ -20,6 +23,14 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(disposable);
+
+	//Register view
+	let openWebView = vscode.commands.registerCommand('vscodeSidebar.openview', () => {
+		// Display a message box to the user
+		vscode.window.showInformationMessage('Command " Sidebar View [vscodeSidebar.openview] " called.');
+	});
+
+	context.subscriptions.push(openWebView);
 }
 
 // this method is called when your extension is deactivated
