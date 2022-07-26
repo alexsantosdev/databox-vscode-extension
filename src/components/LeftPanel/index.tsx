@@ -7,10 +7,10 @@ interface LeftPanelProps {
     message: string
 }
 
-export default function LeftPanel({ message }: LeftPanelProps) {
+export function LeftPanel({ message }: LeftPanelProps) {
     return(
-        <div>
+        <Container>
             <span>teste {message}</span>
-        </div>
+        </Container>
     );
 }

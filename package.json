@@ -3,6 +3,13 @@
   "displayName": "Databox",
   "description": "Database Client for Visual Studio Code Extension",
   "version": "0.0.1",
+  "publisher": "",
+  "homepage": "",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexsantosdev/databox-vscode-extension.git"
+  },
   "engines": {
     "vscode": "^1.69.0"
   },
@@ -10,35 +17,51 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:databox-vscode-extension.helloWorld"
+    "onCommand:vscodeSidebar.openview",
+    "onView:vscodeSidebar.openview"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "webview",
-          "title": "Example for webview",
+          "id": "custom-activitybar",
+          "title": "Databox",
           "icon": "./assets/logo.svg"
         }
       ]
     },
     "views": {
-      "webview": [
+      "custom-activitybar": [
         {
           "type": "webview",
           "id": "vscodeSidebar.openview",
-          "name": "Webview",
-          "icon": "src/assets/logo.svg"
+          "name": "View",
+          "contextualTitle": "View"
         }
       ]
     },
     "commands": [
       {
-        "command": "databox-vscode-extension.helloWorld",
-        "title": "Hello World"
+        "command": "vscodeSidebar.openview",
+        "title": "Sidebar View"
+      },
+      {
+        "command": "vscodeSidebar.menu.view",
+        "category": "vscode-extension-sidebar-html",
+        "title": "Open Webview on sidebar",
+        "icon": "$(clear-all)"
       }
-    ]
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "vscodeSidebar.menu.view",
+          "group": "navigation",
+          "when": "view == vscodeSidebar.openview"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -52,6 +75,8 @@
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "16.x",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.25",
     "@types/vscode": "^1.69.0",
     "@typescript-eslint/eslint-plugin": "^5.30.0",
@@ -63,7 +88,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@types/react-dom": "^18.0.6",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.5"
   }

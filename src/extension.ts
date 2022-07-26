@@ -1,30 +1,30 @@
+// The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
+import { CustomSidebarViewProvider } from './provider/customSidebarViewProvider';
 
-import { LeftWebviewProvider } from './provider/LeftWebviewProvider';
-
+// this method is called when your extension is activated
+// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	const provider = new LeftWebviewProvider(context.extensionUri);
+	const provider = new CustomSidebarViewProvider(context?.extensionUri);
 
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider(
-			LeftWebviewProvider.viewType,
-		  provider
+			"vscodeSidebar.openview",
+		  	provider
 		)
 	  );
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('databox-vscode-extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from databox-vscode-extension!');
-	});
+	  context.subscriptions.push(
+		vscode.commands.registerCommand("vscodeSidebar.menu.view", () => {
+		  const message = "Menu/Title of extension is clicked !";
+		  vscode.window.showInformationMessage(message);
+		})
+	  );
 
-	context.subscriptions.push(disposable);
-
-	//Register view
+	// Command has been defined in the package.json file
+	// Provide the implementation of the command with registerCommand
+	// CommandId parameter must match the command field in package.json
 	let openWebView = vscode.commands.registerCommand('vscodeSidebar.openview', () => {
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Command " Sidebar View [vscodeSidebar.openview] " called.');
