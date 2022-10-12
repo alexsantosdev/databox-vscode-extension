@@ -67,7 +67,7 @@ export class CustomSidebarViewProvider implements vscode.WebviewViewProvider {
 			<body>
         ${           
           ReactDOMServer.renderToString((
-            <LeftPanel message={"Tutorial for Left Panel Webview in VSCode extension"}></LeftPanel>
+            <LeftPanel message={"elemento foda em React"}></LeftPanel>
           ))
         }
 			  <!--<script nonce="${nonce}" src="${scriptUri}"></script>-->
